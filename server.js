@@ -7,7 +7,19 @@ app.set('port', (process.env.PORT || 8080))
 
 
 app.get('/', function (req, res) {
-  res.send('Hello World!, its me again, and again from nodemon')
+    var testing = req.headers['accept-language'].substring(0, 5)
+    var hparser = req.headers['user-agent'].match(/\(([^()]+)\)/g)[0]
+    var hparser3 = hparser.substring(1, hparser.length -1)
+    var hparser2 = req.headers['x-forwarded-for']
+    console.log(testing)
+    console.log('********')
+    console.log(hparser)
+    console.log('********')
+    console.log(hparser3)
+    console.log('********')
+    console.log((hparser2))
+
+  res.send({ipaddress: hparser2, language: testing, software: hparser3})
 })
 
 
